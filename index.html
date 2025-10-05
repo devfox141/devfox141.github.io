@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My CSS experiment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- <h1>เสี่ยโอ</h1> -->
+<audio id="bgm" autoplay loop hidden>
+  <!-- <source src="Kaguya's%20Theme%20-%20Lunatic%20Princess.mp3" type="audio/mpeg">  -->
+</audio>
+
+</body>
+</html>
+<style>
+  #Player-Box {
+    position: absolute;
+    background-image: url("Reimu%20Hakurei.png");     
+    background-position-x: -0.8cm;
+     background-position-y: -0.6cm;
+    background-size: 45cm;
+    width: 70px;
+    height: 130px;
+    z-index: 3;
+  }
+    #Big-Boss {
+    background-image: url("น้องบีตีกลอง.png");     
+    background-position-x: -0.8cm;
+    background-color: crimson;
+    transform-box: 3; 
+    background-position-y: -0.6cm;
+    background-size: 5cm;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    z-index: 2;
+  }
+  #Bullet {
+    position: absolute;
+    background-image: url("Reimu%20Hakurei.png");     
+    background-position-x: -0.4cm;
+    background-position-y: -7.1cm;
+    background-size: 30cm;
+    transform: rotate(-90deg); 
+    transform-origin: center center;
+    width: 30px;
+    height: 30px;
+    z-index: 2; 
+  }
+    #scoreBoard {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: rgb(255, 0, 0);
+      background: rgba(0,0,0,0.5);
+      padding: 8px 12px;
+      border-radius: 8px;
+}
+</style>
+
+<div id="Player-Box"></div>
+<div id="Bullet"></div>
+<div id="Big-Boss"></div>
+<div id="scoreBoard">Score: 0</div>
+
+<script>
+let score = parseInt(localStorage.getItem("score")) || 0; // Load saved score
+const myBox = document.getElementById("Player-Box");
+const myBullet= document.getElementById("Bullet");
+const boxBoss= document.getElementById("Big-Boss");
+const scoreBoard = document.getElementById("scoreBoard");
+
+let X = 700;
+let Y = 600;
+let count = 0;
+let bulletSpeed = 10;
+let bgX = -0.8; 
+let bgY = -0.6;
+let shooting = false;
+let shootInterval;
+const step = -2.21; 
+const maxSteps = 8;
+
+const moveAmount = 5;
+
+const keysPressed = {};
+
+const limit = {
+  minX: 0,
+  minY: 0,
+  maxX: window.innerWidth - myBox.offsetWidth,
+  maxY: window.innerHeight - myBox.offsetHeight
+};
+
+scoreBoard.textContent = "Score: " + score;
+
+function saveScore() {
+  localStorage.setItem("score", score); 
+}
+
+function updatehealt( ) {
+  boxBoss.style.background.H
+}
+
+function updatePosition() {
+   myBox.style.backgroundPositionY = bgY + "cm";
+
+  if (keysPressed["KeyW"]) Y -= moveAmount, bgY = -0.6;
+  if (keysPressed["KeyS"]) Y += moveAmount, bgY = -0.6;
+  if (keysPressed["KeyA"]) X -= moveAmount, bgY = -4;
+  if (keysPressed["KeyD"]) X += moveAmount, bgY = -7.3;
+
+  if (keysPressed["ArrowUp"]) Y -= moveAmount, bgY = -0.6;
+  if (keysPressed["ArrowDown"]) Y += moveAmount, bgY = -0.6;
+  if (keysPressed["ArrowLeft"]) X -= moveAmount, bgY = -4;;
+  if (keysPressed["ArrowRight"]) X += moveAmount, bgY = -7.3;
+
+  X = Math.max(limit.minX, Math.min(limit.maxX, X));
+  Y = Math.max(limit.minY, Math.min(limit.maxY, Y));
+
+  myBox.style.top = Y + "px";
+  myBox.style.left = X + "px";
+
+
+  requestAnimationFrame(updatePosition);
+}
+
+
+
+
+function animateBackgroundX() {
+
+  myBox.style.backgroundPositionX = bgX + "cm";
+
+  count++;
+  if (count >= maxSteps) {
+    bgX = -0.8; 
+    count = 0;
+  } else {
+    bgX += step; 
+  }
+  setTimeout(animateBackgroundX, 100);
+}
+function fireBullet() {
+  const bullet = myBullet.cloneNode(true);
+  bullet.style.display = "block"; 
+  bullet.style.position = "absolute";
+  bullet.style.left = (X + myBox.offsetWidth / 2 - bullet.offsetWidth / 2) + "px";
+  bullet.style.top = (Y - bullet.offsetHeight) + "px";
+
+  document.body.appendChild(bullet);
+
+  function moveBullet() {
+    let top = parseInt(bullet.style.top);
+    top -= bulletSpeed
+    ;
+    bullet.style.top = top + "px";
+
+    const boss = document.getElementById("Big-Boss");
+    if (boss) {
+      const bulletRect = bullet.getBoundingClientRect();
+      const bossRect = boss.getBoundingClientRect();
+
+      if (bulletRect.left < bossRect.right && bulletRect.right > bossRect.left && bulletRect.top < bossRect.bottom && bulletRect.bottom > bossRect.top) 
+      {
+        bullet.remove(); 
+        score++; // เพิ่มคะแนน
+        scoreBoard.textContent = "Score: " + score;
+        saveScore();
+        return; 
+      }
+    }
+
+    if (top < 0) {
+      bullet.remove(); 
+    } else {
+      requestAnimationFrame(moveBullet);
+    }
+  }
+
+  moveBullet();
+}
+
+document.addEventListener("keydown", (event) => {
+  keysPressed[event.code] = true;
+      const bgm = document.getElementById("bgm");
+        bgm.play().catch(err => console.log("Autoplay blocked:", err));
+
+  if (event.code === "KeyA" || event.code === "KeyD" || event.code === "ArrowLeft" || event.code === "ArrowRight")  {
+
+  }
+  if (event.code === "KeyZ" && !shooting) {
+    shooting = true;
+    fireBullet(); 
+    shootInterval = setInterval(fireBullet, 50); 
+  }
+});
+
+document.addEventListener("keyup", (event) => {
+  myBox.style.backgroundPositionY = bgY + "cm";
+  keysPressed[event.code] = false;
+  if (event.code === "KeyA" || event.code === "KeyD" || event.code === "ArrowLeft" || event.code === "ArrowRight")  {
+
+    bgY = -0.6
+  }
+    if (event.code === "KeyZ") {
+    shooting = false;
+    clearInterval(shootInterval); 
+  }
+});
+updatePosition();
+animateBackgroundX()
+</script>
+

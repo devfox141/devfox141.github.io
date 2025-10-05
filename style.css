@@ -1,0 +1,32 @@
+body {
+font-family: Arial, sans-serif;
+/* background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); */
+background-image: url("Reimu%20Hakurei.png"); 
+background-repeat: no-repeat;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+#bullet {
+font-family: Arial, sans-serif;
+/* background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); */
+background-repeat: no-repeat;
+background-color: red;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+h1 { 
+color: rgb(255, 217, 0);
+text-align: center;
+font-size: 2.5rem;
+}
+html {
+scroll-behavior: smooth;
+}
