@@ -1,220 +1,298 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My CSS experiment</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paninnthron Sripai — Game Developer</title>
+<style>
+*{margin:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:#F8FAFC;color:#17231f}
+a.btn{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 20px;border-radius:99px;font-size:13px;font-weight:800;text-decoration:none;transition:.2s;cursor:pointer}
+a.btn:hover{transform:translateY(-3px)}
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;color:#f8f7f2;padding:28px clamp(24px,6vw,96px) 48px;overflow:hidden;background:radial-gradient(circle at 78% 30%,rgba(222,255,87,.16),transparent 24rem),radial-gradient(circle at 12% 90%,rgba(255,126,80,.12),transparent 22rem),#111}
+.hero::after{content:"";position:absolute;inset:0;opacity:.15;pointer-events:none;background:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:linear-gradient(#000,transparent 90%)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.14)}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.brand i{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#deff57;color:#111;font-size:12px;font-weight:900;font-style:normal}
+.avail{display:flex;align-items:center;gap:9px;color:rgba(248,247,242,.72);font-size:12px}
+.avail i{width:8px;height:8px;border-radius:50%;background:#deff57;box-shadow:0 0 0 5px rgba(222,255,87,.12)}
+.hgrid{flex:1;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(44px,8vw,130px);padding:clamp(58px,9vw,112px) 0 62px;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;color:#deff57;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow::before{content:"";width:30px;height:2px;background:#deff57}
+h1{font-size:clamp(48px,7.5vw,110px);font-weight:800;letter-spacing:-.085em;line-height:.92}
+h1 em{color:#deff57;font-style:normal}
+.intro{max-width:520px;margin-top:32px;color:rgba(248,247,242,.68);font-size:clamp(16px,1.5vw,19px);line-height:1.65}
+.actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:36px}
+.btn-p{background:#deff57;color:#111}.btn-p:hover{background:#f0ff9e}
+.btn-s{border:1px solid rgba(255,255,255,.26);color:#f8f7f2;background:rgba(255,255,255,.04)}.btn-s:hover{border-color:#deff57;color:#deff57}
+.pwrap{min-height:420px;display:grid;place-items:center;position:relative}
+.pwrap::before{content:"";width:min(32vw,390px);aspect-ratio:1;position:absolute;border:1px solid rgba(222,255,87,.42);border-radius:48% 52% 45% 55%;transform:rotate(17deg)}
+.pcard{width:min(29vw,340px);min-width:250px;aspect-ratio:.79;position:relative;overflow:hidden;border:8px solid #f8f7f2;border-radius:170px 170px 22px 22px;background:linear-gradient(145deg,#d8e5bc 0%,#718577 54%,#263e42 100%);box-shadow:25px 30px 0 rgba(222,255,87,.88);transform:rotate(4deg);transition:.2s}
+.pcard:hover{transform:rotate(1deg) translateY(-6px)}
+.pcard img{width:100%;height:100%;display:block;object-fit:cover}
+.plabel{position:absolute;left:18px;bottom:18px;padding:8px 11px;border-radius:3px;background:#deff57;color:#111;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.hfoot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);position:relative;z-index:1}
+.hfoot>p{color:rgba(248,247,242,.52);font-size:12px}
+.stats{display:flex;gap:clamp(22px,5vw,64px)}
+.stats b{display:block;color:#deff57;font-size:25px;letter-spacing:-.05em}
+.stats span{display:block;margin-top:3px;color:rgba(248,247,242,.52);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+/* ABOUT */
+.about,.projects,.contact{padding:112px 6vw}
+.about{background:#f5f7f2}
+.ain,.pgrid{max-width:1240px;margin:0 auto}
+.aeyebrow{display:inline-flex;align-items:center;gap:10px;color:#44745b;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.aeyebrow::before{content:"";width:30px;height:2px;background:#e49b62}
+h2{max-width:700px;margin:18px 0 22px;font-family:Georgia,serif;font-size:clamp(42px,6vw,78px);font-weight:500;letter-spacing:-.055em;line-height:.98}
+.acopy{max-width:490px;color:#617069;font-size:17px;line-height:1.75}
+.agrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px;margin-top:68px}
+.card{border:1px solid #e1e8e1;border-radius:24px;background:rgba(255,255,255,.7);padding:30px;box-shadow:0 12px 34px rgba(40,61,48,.05)}
+.kicker{margin-bottom:13px;color:#e49b62;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.bio h3{font-family:Georgia,serif;font-size:30px;font-weight:500;color:#20332b;margin-bottom:16px}
+.bio p{color:#64736c;font-size:15px;line-height:1.8}
+.shead{display:flex;justify-content:space-between;margin-bottom:20px}
+.shead h3{font-size:17px;color:#20332b}.shead span{color:#829089;font-size:12px}
+.slist{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;list-style:none}
+.slist li{display:flex;align-items:center;gap:10px;color:#53635b;font-size:14px}
+.slist li::before{content:"✓";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#e4f0e5;color:#4e8762;font-size:12px;font-weight:800}
+.lrow{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.dark{background:#1e3029;color:#fff;border:none}
+.dark h3{display:flex;justify-content:space-between;align-items:center;font-size:17px;margin-bottom:26px}
+.dark h3 small{color:#92a99a;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.tl{display:grid;gap:22px}
+.tli{position:relative;padding-left:22px;border-left:1px solid rgba(205,229,207,.25)}
+.tli::before{content:"";position:absolute;width:7px;height:7px;left:-4px;top:5px;border-radius:50%;background:#e49b62}
+.tli time{color:#a8c4ae;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.tli h4{margin:7px 0 4px;color:#f5faf4;font-size:15px}
+.tli p{color:#a9bcb0;font-size:13px;line-height:1.55}
+.tags{display:flex;flex-wrap:wrap;gap:10px}
+.tags span{padding:10px 13px;border:1px solid #dce6de;border-radius:99px;background:#f8faf7;color:#506158;font-size:13px;transition:.2s}
+.tags span:hover{transform:translateY(-3px);border-color:#a8c7ae;background:#edf6ee}
+/* PROJECTS */
+.projects{background:#111;color:#f8f7f2}
+.projects h2{color:#f8f7f2}
+.projects .aeyebrow{color:#deff57}.projects .aeyebrow::before{background:#deff57}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+.proj{border:1px solid rgba(255,255,255,.14);border-radius:24px;overflow:hidden;background:rgba(255,255,255,.03);transition:.2s}
+.proj:hover{transform:translateY(-8px);border-color:#deff57}
+.proj .thumb{aspect-ratio:16/10;background:#1a1a1a;overflow:hidden}
+.proj .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.proj .info{padding:24px}
+.proj b{color:#deff57;font-size:12px;letter-spacing:.15em;text-transform:uppercase}
+.proj h3{margin:12px 0 10px;font-size:22px}
+.proj p{color:rgba(248,247,242,.65);font-size:14px;line-height:1.7}
+/* CONTACT */
+.contact{background:#f5f7f2;text-align:center}
+.contact h2{margin:0 auto 18px}
+.contact>p{color:#617069;max-width:520px;margin:0 auto 32px;line-height:1.7}
+.btn-o{background:#e49b62;color:#fff}.btn-o:hover{background:#d98c50}
+/* ปุ่มสลับภาษา */
+.lt{position:fixed;right:18px;bottom:18px;z-index:99;display:flex;gap:2px;padding:4px;border-radius:99px;background:rgba(17,17,17,.85);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+.lt button{padding:8px 14px;border:0;border-radius:99px;background:transparent;color:rgba(248,247,242,.6);font:800 11px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;transition:.2s}
+.lt button:hover:not(.on){color:#fff}
+.lt button.on{background:#deff57;color:#111}
+@media(max-width:900px){.hgrid,.agrid,.lrow,.pgrid{grid-template-columns:1fr}.pwrap{order:-1;min-height:370px}.pcard{width:min(66vw,300px)}.about,.projects,.contact{padding:82px 5vw}.hfoot{flex-direction:column;align-items:flex-start}}
+@media(max-width:460px){.avail{display:none}.actions .btn{width:100%}.stats{width:100%;justify-content:space-between;gap:14px}.lt button{padding:7px 12px}}
+</style>
 </head>
 <body>
-  <!-- <h1>เสี่ยโอ</h1> -->
-<audio id="bgm" autoplay loop hidden>
-  <!-- <source src="Kaguya's%20Theme%20-%20Lunatic%20Princess.mp3" type="audio/mpeg">  -->
-</audio>
 
-</body>
-</html>
-<style>
-  #Player-Box {
-    position: absolute;
-    background-image: url("Reimu%20Hakurei.png");     
-    background-position-x: -0.8cm;
-     background-position-y: -0.6cm;
-    background-size: 45cm;
-    width: 70px;
-    height: 130px;
-    z-index: 3;
-  }
-    #Big-Boss {
-    background-image: url("น้องบีตีกลอง.png");     
-    background-position-x: -0.8cm;
-    background-color: crimson;
-    transform-box: 3; 
-    background-position-y: -0.6cm;
-    background-size: 5cm;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    z-index: 2;
-  }
-  #Bullet {
-    position: absolute;
-    background-image: url("Reimu%20Hakurei.png");     
-    background-position-x: -0.4cm;
-    background-position-y: -7.1cm;
-    background-size: 30cm;
-    transform: rotate(-90deg); 
-    transform-origin: center center;
-    width: 30px;
-    height: 30px;
-    z-index: 2; 
-  }
-    #scoreBoard {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 24px;
-      font-weight: bold;
-      color: rgb(255, 0, 0);
-      background: rgba(0,0,0,0.5);
-      padding: 8px 12px;
-      border-radius: 8px;
-}
-</style>
+<!-- ปุ่มสลับภาษา -->
+<div class="lt">
+  <button data-l="en">EN</button>
+  <button data-l="th">ไทย</button>
+</div>
 
-<div id="Player-Box"></div>
-<div id="Bullet"></div>
-<div id="Big-Boss"></div>
-<div id="scoreBoard">Score: 0</div>
+<section class="hero">
+  <div class="topbar">
+    <div class="brand"><i>PS</i><span data-i18n="brand"></span></div>
+    <div class="avail"><i></i><span data-i18n="avail"></span></div>
+  </div>
+  <div class="hgrid">
+    <div>
+      <p class="eyebrow" data-i18n="hero_eyebrow"></p>
+      <h1>Paninnthron<br><em>Sripai.</em></h1>
+      <p class="intro" data-i18n="hero_intro"></p>
+      <div class="actions">
+        <a class="btn btn-p" href="#projects" data-i18n="btn_projects"></a>
+        <a class="btn btn-s" href="#contact" data-i18n="btn_contact"></a>
+      </div>
+    </div>
+    <div class="pwrap">
+      <div class="pcard">
+        <img src="Photo/mainprofile.jpg" alt="Paninnthron Sripai">
+        <span class="plabel" data-i18n="profile_label"></span>
+      </div>
+    </div>
+  </div>
+  <div class="hfoot">
+    <p data-i18n="hero_foot"></p>
+    <div class="stats">
+      <div><b>03+</b><span data-i18n="stat1"></span></div>
+      <div><b>12</b><span data-i18n="stat2"></span></div>
+      <div><b>05</b><span data-i18n="stat3"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="ain">
+    <p class="aeyebrow" data-i18n="about_eyebrow"></p>
+    <h2 data-i18n="about_title"></h2>
+    <p class="acopy" data-i18n="about_copy"></p>
+    <div class="agrid">
+      <div class="card dark bio">
+        <p class="kicker" style="color:#bde28c" data-i18n="phil_kicker"></p>
+        <h3 style="color:#fff" data-i18n="phil_title"></h3>
+        <p style="color:rgba(255,255,255,.8)" data-i18n="phil_body"></p>
+      </div>
+      <div>
+        <div class="card">
+          <div class="shead"><h3 data-i18n="skills_head"></h3><span data-i18n="skills_sub"></span></div>
+          <ul class="slist">
+            <li data-i18n="skill1"></li>
+            <li data-i18n="skill2"></li>
+            <li data-i18n="skill3"></li>
+            <li data-i18n="skill4"></li>
+            <li data-i18n="skill5"></li>
+            <li data-i18n="skill6"></li>
+          </ul>
+        </div>
+        <div class="lrow">
+          <div class="card dark">
+            <h3><span data-i18n="exp_head"></span> <small data-i18n="exp_sub"></small></h3>
+            <div class="tl">
+              <div class="tli"><time data-i18n="exp1_time"></time><h4 data-i18n="exp1_title"></h4><p data-i18n="exp1_desc"></p></div>
+              <div class="tli"><time>2023 — 2024</time><h4 data-i18n="exp2_title"></h4><p data-i18n="exp2_desc"></p></div>
+              <div class="tli"><time>2022 — 2023</time><h4 data-i18n="exp3_title"></h4><p data-i18n="exp3_desc"></p></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="shead"><h3 data-i18n="toolkit_head"></h3><span data-i18n="toolkit_sub"></span></div>
+            <div class="tags"><span>Unity</span><span>C#</span><span>Unreal</span><span>Blender</span><span>Aseprite</span><span>Godot</span><span>Photoshop</span><span>FMOD</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <p class="aeyebrow" data-i18n="portfolio_eyebrow"></p>
+  <h2 data-i18n="portfolio_title"></h2>
+  <div class="pgrid">
+    <div class="proj">
+      <div class="thumb"><img src="Photo/Pho1.png" alt="Game 1"></div>
+      <div class="info">
+        <b data-i18n="proj1_tag"></b>
+        <h3 data-i18n="proj1_title"></h3>
+        <p data-i18n="proj1_desc"></p>
+      </div>
+    </div>
+    <div class="proj">
+      <div class="thumb"><img src="Photo/Pho2.png" alt="Game 2"></div>
+      <div class="info">
+        <b data-i18n="proj2_tag"></b>
+        <h3 data-i18n="proj2_title"></h3>
+        <p data-i18n="proj2_desc"></p>
+      </div>
+    </div>
+    <div class="proj">
+      <div class="thumb"><img src="Photo/Pho3.png" alt="Game 3"></div>
+      <div class="info">
+        <b data-i18n="proj3_tag"></b>
+        <h3 data-i18n="proj3_title"></h3>
+        <p data-i18n="proj3_desc"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <p class="aeyebrow" data-i18n="contact_eyebrow"></p>
+  <h2 data-i18n="contact_title"></h2>
+  <p data-i18n="contact_copy"></p>
+  <a class="btn btn-o" href="mailto:your-email@example.com" data-i18n="contact_btn"></a>
+</section>
 
 <script>
-let score = parseInt(localStorage.getItem("score")) || 0; // Load saved score
-const myBox = document.getElementById("Player-Box");
-const myBullet= document.getElementById("Bullet");
-const boxBoss= document.getElementById("Big-Boss");
-const scoreBoard = document.getElementById("scoreBoard");
+/* ★★★ แก้ไขข้อความได้ที่นี่ที่เดียว ★★★
+   - en: อังกฤษ, th: ไทย
+   - ขึ้นบรรทัดใหม่ใช้ <br> ได้เลย */
+const T = {
+  brand:        { en:"Portfolio / 2025", th:"พอร์ตโฟลิโอ / 2025" },
+  avail:        { en:"Available for game projects", th:"พร้อมรับงานสร้างเกม" },
+  hero_eyebrow: { en:"Game Developer & Designer", th:"นักพัฒนาและออกแบบเกม" },
+  hero_intro:   { en:"I craft immersive game experiences — blending creative game design with solid programming to build worlds players love to explore.",
+                  th:"ผมสร้างประสบการณ์เกมที่ดื่มด่ำ ผสานการออกแบบเกมอย่างสร้างสรรค์เข้ากับโค้ดที่แข็งแรง เพื่อสร้างโลกที่ผู้เล่นหลงใหล" },
+  btn_projects: { en:"View projects ↗", th:"ดูผลงาน ↗" },
+  btn_contact:  { en:"Contact me →", th:"ติดต่อผม →" },
+  profile_label:{ en:"Game Developer · Thailand", th:"นักพัฒนาเกม · ประเทศไทย" },
+  hero_foot:    { en:"Game Design · Unity / Unreal · 2D / 3D Games", th:"ออกแบบเกม · Unity / Unreal · เกม 2D / 3D" },
+  stat1:        { en:"Years experience", th:"ปีของประสบการณ์" },
+  stat2:        { en:"Games created", th:"เกมที่สร้างแล้ว" },
+  stat3:        { en:"Game jams joined", th:"เกมแจมที่ร่วม" },
 
-let X = 700;
-let Y = 600;
-let count = 0;
-let bulletSpeed = 10;
-let bgX = -0.8; 
-let bgY = -0.6;
-let shooting = false;
-let shootInterval;
-const step = -2.21; 
-const maxSteps = 8;
+  about_eyebrow:{ en:"About me", th:"เกี่ยวกับผม" },
+  about_title:  { en:"Building worlds,<br>one line at a time.", th:"สร้างโลกใหม่<br>ทีละบรรทัด" },
+  about_copy:   { en:"I'm a game developer passionate about creating engaging gameplay experiences — from quick prototypes to full productions.",
+                  th:"ผมเป็นนักพัฒนาเกมที่หลงใหลในการสร้างเกมเพลย์ที่สนุกและน่าติดตาม ตั้งแต่ต้นแบบเร็ว ๆ จนถึงผลงานเต็มรูปแบบ" },
+  phil_kicker:  { en:"Philosophy", th:"แนวคิด" },
+  phil_title:   { en:"Player first", th:"ผู้เล่นมาก่อน" },
+  phil_body:    { en:"Great games come from understanding what makes players tick. I focus on tight mechanics, satisfying feedback, and moments players remember.",
+                  th:"เกมที่ดีเกิดจากความเข้าใจว่าอะไรทำให้ผู้เล่นสนุก ผมมุ่งเน้นกลไกเกมที่แน่นหนา ฟีดแบ็กที่รู้สึกได้ และช่วงเวลาที่ผู้เล่นจดจำ" },
+  skills_head:  { en:"What I do", th:"สิ่งที่ผมทำ" },
+  skills_sub:   { en:"Core skills", th:"ทักษะหลัก" },
+  skill1:       { en:"Gameplay programming", th:"เขียนโค้ดระบบเกม" },
+  skill2:       { en:"Game design", th:"ออกแบบเกม" },
+  skill3:       { en:"Level design", th:"ออกแบบด่าน" },
+  skill4:       { en:"2D / 3D art", th:"งานศิลปะ 2D / 3D" },
+  skill5:       { en:"UI / UX for games", th:"ออกแบบ UI / UX เกม" },
+  skill6:       { en:"Prototyping", th:"สร้างต้นแบบ" },
+  exp_head:     { en:"Experience", th:"ประสบการณ์" },
+  exp_sub:      { en:"2022 — Now", th:"2022 — ปัจจุบัน" },
+  exp1_time:    { en:"2024 — Now", th:"2024 — ปัจจุบัน" },
+  exp1_title:   { en:"Indie Game Developer", th:"นักพัฒนาเกมอินดี้" },
+  exp1_desc:    { en:"Building original games and collaborating with small teams.", th:"สร้างเกมของตัวเองและร่วมงานกับทีมเล็ก ๆ" },
+  exp2_title:   { en:"Game Jam Participant", th:"ผู้เข้าร่วม Game Jam" },
+  exp2_desc:    { en:"Created multiple jam games — learning fast iteration.", th:"สร้างเกมแจมหลายชิ้น เรียนรู้การพัฒนาอย่างรวดเร็ว" },
+  exp3_title:   { en:"Started Game Dev", th:"เริ่มต้นทำเกม" },
+  exp3_desc:    { en:"Began learning Unity and game design fundamentals.", th:"เริ่มเรียนรู้ Unity และพื้นฐานการออกแบบเกม" },
+  toolkit_head: { en:"Toolkit", th:"เครื่องมือ" },
+  toolkit_sub:  { en:"Daily drivers", th:"ใช้เป็นประจำ" },
 
-const moveAmount = 5;
+  portfolio_eyebrow:{ en:"Portfolio", th:"ผลงาน" },
+  portfolio_title:  { en:"My works.", th:"ผลงานของผม" },
+  proj1_tag:    { en:"01 · Game", th:"01 · เกม" },
+  proj1_title:  { en:"Project One", th:"ผลงานชิ้นที่ 1" },
+  proj1_desc:   { en:"Short description of your first game.", th:"คำอธิบายผลงานเกมแรกของคุณสั้น ๆ" },
+  proj2_tag:    { en:"02 · Game", th:"02 · เกม" },
+  proj2_title:  { en:"Project Two", th:"ผลงานชิ้นที่ 2" },
+  proj2_desc:   { en:"Short description of your second game.", th:"คำอธิบายผลงานเกมที่สองของคุณ" },
+  proj3_tag:    { en:"03 · Game", th:"03 · เกม" },
+  proj3_title:  { en:"Project Three", th:"ผลงานชิ้นที่ 3" },
+  proj3_desc:   { en:"Short description of your third game.", th:"คำอธิบายผลงานเกมที่สามของคุณ" },
 
-const keysPressed = {};
-
-const limit = {
-  minX: 0,
-  minY: 0,
-  maxX: window.innerWidth - myBox.offsetWidth,
-  maxY: window.innerHeight - myBox.offsetHeight
+  contact_eyebrow:{ en:"Get in touch", th:"ติดต่อผม" },
+  contact_title:  { en:"Let's make a game<br>worth playing.", th:"มาสร้างเกม<br>ที่สนุกคุ้มค่าแก่การเล่นกัน" },
+  contact_copy:   { en:"Have a game idea or project? I'm always open to collaborating on exciting new games.",
+                    th:"มีไอเดียเกมหรือโปรเจกต์อยู่ไหม? ผมยินดีร่วมงานสร้างเกมใหม่ ๆ ที่น่าตื่นเต้นเสมอ" },
+  contact_btn:    { en:"your-email@example.com →", th:"your-email@example.com →" },
 };
 
-scoreBoard.textContent = "Score: " + score;
-
-function saveScore() {
-  localStorage.setItem("score", score); 
+/* สลับภาษา */
+function lang(l){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    if(T[key] && T[key][l]) el.innerHTML = T[key][l];
+  });
+  document.querySelectorAll('.lt button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+  document.documentElement.lang = l;
+  localStorage.lang = l;
 }
-
-function updatehealt( ) {
-  boxBoss.style.background.H
-}
-
-function updatePosition() {
-   myBox.style.backgroundPositionY = bgY + "cm";
-
-  if (keysPressed["KeyW"]) Y -= moveAmount, bgY = -0.6;
-  if (keysPressed["KeyS"]) Y += moveAmount, bgY = -0.6;
-  if (keysPressed["KeyA"]) X -= moveAmount, bgY = -4;
-  if (keysPressed["KeyD"]) X += moveAmount, bgY = -7.3;
-
-  if (keysPressed["ArrowUp"]) Y -= moveAmount, bgY = -0.6;
-  if (keysPressed["ArrowDown"]) Y += moveAmount, bgY = -0.6;
-  if (keysPressed["ArrowLeft"]) X -= moveAmount, bgY = -4;;
-  if (keysPressed["ArrowRight"]) X += moveAmount, bgY = -7.3;
-
-  X = Math.max(limit.minX, Math.min(limit.maxX, X));
-  Y = Math.max(limit.minY, Math.min(limit.maxY, Y));
-
-  myBox.style.top = Y + "px";
-  myBox.style.left = X + "px";
-
-
-  requestAnimationFrame(updatePosition);
-}
-
-
-
-
-function animateBackgroundX() {
-
-  myBox.style.backgroundPositionX = bgX + "cm";
-
-  count++;
-  if (count >= maxSteps) {
-    bgX = -0.8; 
-    count = 0;
-  } else {
-    bgX += step; 
-  }
-  setTimeout(animateBackgroundX, 100);
-}
-function fireBullet() {
-  const bullet = myBullet.cloneNode(true);
-  bullet.style.display = "block"; 
-  bullet.style.position = "absolute";
-  bullet.style.left = (X + myBox.offsetWidth / 2 - bullet.offsetWidth / 2) + "px";
-  bullet.style.top = (Y - bullet.offsetHeight) + "px";
-
-  document.body.appendChild(bullet);
-
-  function moveBullet() {
-    let top = parseInt(bullet.style.top);
-    top -= bulletSpeed
-    ;
-    bullet.style.top = top + "px";
-
-    const boss = document.getElementById("Big-Boss");
-    if (boss) {
-      const bulletRect = bullet.getBoundingClientRect();
-      const bossRect = boss.getBoundingClientRect();
-
-      if (bulletRect.left < bossRect.right && bulletRect.right > bossRect.left && bulletRect.top < bossRect.bottom && bulletRect.bottom > bossRect.top) 
-      {
-        bullet.remove(); 
-        score++; // เพิ่มคะแนน
-        scoreBoard.textContent = "Score: " + score;
-        saveScore();
-        return; 
-      }
-    }
-
-    if (top < 0) {
-      bullet.remove(); 
-    } else {
-      requestAnimationFrame(moveBullet);
-    }
-  }
-
-  moveBullet();
-}
-
-document.addEventListener("keydown", (event) => {
-  keysPressed[event.code] = true;
-      const bgm = document.getElementById("bgm");
-        bgm.play().catch(err => console.log("Autoplay blocked:", err));
-
-  if (event.code === "KeyA" || event.code === "KeyD" || event.code === "ArrowLeft" || event.code === "ArrowRight")  {
-
-  }
-  if (event.code === "KeyZ" && !shooting) {
-    shooting = true;
-    fireBullet(); 
-    shootInterval = setInterval(fireBullet, 50); 
-  }
-});
-
-document.addEventListener("keyup", (event) => {
-  myBox.style.backgroundPositionY = bgY + "cm";
-  keysPressed[event.code] = false;
-  if (event.code === "KeyA" || event.code === "KeyD" || event.code === "ArrowLeft" || event.code === "ArrowRight")  {
-
-    bgY = -0.6
-  }
-    if (event.code === "KeyZ") {
-    shooting = false;
-    clearInterval(shootInterval); 
-  }
-});
-updatePosition();
-animateBackgroundX()
+document.querySelectorAll('.lt button').forEach(b=>b.addEventListener('click',()=>lang(b.dataset.l)));
+lang(localStorage.lang||'en');
 </script>
-
+</body>
+</html>
